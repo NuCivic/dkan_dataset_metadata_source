@@ -8,6 +8,9 @@
  * Implements hook_ctools_plugin_api().
  */
 function dkan_dataset_metadata_source_ctools_plugin_api($module = NULL, $api = NULL) {
+  if ($module == "field_group" && $api == "field_group") {
+    return array("version" => "1");
+  }
   if ($module == "strongarm" && $api == "strongarm") {
     return array("version" => "1");
   }
@@ -27,5 +30,6 @@ function dkan_dataset_metadata_source_node_info() {
       'help' => t('Give metadata sources specific, descriptive titles such as "ISO-19139 Metadata" or "Original FGDC Metadata"'),
     ),
   );
+  drupal_alter('node_info', $items);
   return $items;
 }
